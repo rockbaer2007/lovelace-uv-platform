@@ -24,20 +24,25 @@ var e = class {
 		return this.items.size;
 	}
 }, t = class {
-	registry = new e();
-	version = "0.1.0-alpha.1";
-	start() {
-		console.info(`🚀 Lovelace UV Platform ${this.version} started`);
+	_registry = new e();
+	get registry() {
+		return this._registry;
 	}
+}, n = class {
+	_services = new t();
+	get services() {
+		return this._services;
+	}
+	start() {}
 };
 //#endregion
 //#region src/bootstrap/bootstrap.ts
-function n() {
-	new t().start();
+function r() {
+	new n().start();
 }
 //#endregion
 //#region src/main.ts
-n();
+r();
 //#endregion
 
 //# sourceMappingURL=lovelace-uv-platform.js.map

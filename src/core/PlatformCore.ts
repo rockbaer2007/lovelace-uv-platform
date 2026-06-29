@@ -1,13 +1,27 @@
-import { Registry } from "../registry/Registry";
+import { PlatformServices } from "./PlatformServices";
 
+/**
+ * Main entry point of the Lovelace UV Platform.
+ */
 export class PlatformCore {
-  public readonly registry = new Registry();
 
-  private readonly version = "0.1.0-alpha.1";
+    private readonly _services = new PlatformServices();
 
-  public start(): void {
-    console.info(
-      `🚀 Lovelace UV Platform ${this.version} started`
-    );
-  }
+    /**
+     * Returns the platform services.
+     */
+    public get services(): PlatformServices {
+        return this._services;
+    }
+
+    /**
+     * Starts the platform.
+     *
+     * Lifecycle management will be implemented
+     * in CORE-005.
+     */
+    public start(): void {
+        // Intentionally left empty.
+    }
+
 }
