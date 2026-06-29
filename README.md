@@ -1,6 +1,15 @@
-ATLAS-103B
+ATLAS-200 Vertical Slice
 
-This package extends the initial PlatformBuilder with a fluent,
-immutable configuration model.
+Purpose:
+Create the first executable end-to-end runtime.
 
-Integrate only after the PlatformBuilder foundation is committed.
+Phase 1
+- Runtime interfaces
+- Runtime implementation
+- Documentation
+
+Phase 2
+- Connect Provider
+- Connect Layout
+- Connect Renderer
+- Produce real RenderResult
