@@ -77,7 +77,7 @@ the Lovelace UV Platform.
 -   ✅ Build System
 -   ✅ Bootstrap
 -   ✅ Platform Core
--   ⏳ Generic Registry
+-   ✅ Generic Registry
 -   ⏳ Service Container
 -   ⏳ Lifecycle
 -   ⏳ Event Bus
