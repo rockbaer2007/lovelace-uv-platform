@@ -1,31 +1,58 @@
-export class Registry<T extends { id: string }> {
-  private readonly items = new Map<string, T>();
+import { RegistryItem } from "./RegistryItem";
 
-  public register(item: T): void {
-    this.items.set(item.id, item);
-  }
+/**
+ * Generic registry for storing platform components.
+ */
+export class Registry<T extends RegistryItem> {
 
-  public unregister(id: string): boolean {
-    return this.items.delete(id);
-  }
+    private readonly items = new Map<string, T>();
 
-  public has(id: string): boolean {
-    return this.items.has(id);
-  }
+    /**
+     * Registers an item.
+     */
+    public register(item: T): void {
+        this.items.set(item.id, item);
+    }
 
-  public get(id: string): T | undefined {
-    return this.items.get(id);
-  }
+    /**
+     * Removes an item.
+     */
+    public unregister(id: string): boolean {
+        return this.items.delete(id);
+    }
 
-  public getAll(): T[] {
-    return [...this.items.values()];
-  }
+    /**
+     * Returns an item.
+     */
+    public get(id: string): T | undefined {
+        return this.items.get(id);
+    }
 
-  public clear(): void {
-    this.items.clear();
-  }
+    /**
+     * Checks whether an item exists.
+     */
+    public has(id: string): boolean {
+        return this.items.has(id);
+    }
 
-  public count(): number {
-    return this.items.size;
-  }
+    /**
+     * Returns all registered items.
+     */
+    public getAll(): readonly T[] {
+        return [...this.items.values()];
+    }
+
+    /**
+     * Clears the registry.
+     */
+    public clear(): void {
+        this.items.clear();
+    }
+
+    /**
+     * Number of registered items.
+     */
+    public get size(): number {
+        return this.items.size;
+    }
 }

@@ -1,11 +1,10 @@
 /**
- * Represents an item that can be stored in a Registry.
+ * Represents an item that can be registered
+ * inside a Registry.
  */
 export interface RegistryItem {
-
-  /**
-   * Unique identifier.
-   */
-  readonly id: string;
-
+    /**
+     * Unique identifier of the registry item.
+     */
+    readonly id: string;
 }

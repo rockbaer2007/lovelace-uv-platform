@@ -7,11 +7,11 @@ var e = class {
 	unregister(e) {
 		return this.items.delete(e);
 	}
-	has(e) {
-		return this.items.has(e);
-	}
 	get(e) {
 		return this.items.get(e);
+	}
+	has(e) {
+		return this.items.has(e);
 	}
 	getAll() {
 		return [...this.items.values()];
@@ -19,7 +19,7 @@ var e = class {
 	clear() {
 		this.items.clear();
 	}
-	count() {
+	get size() {
 		return this.items.size;
 	}
 }, t = class {
