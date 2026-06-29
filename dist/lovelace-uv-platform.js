@@ -2,6 +2,7 @@
 var e = class {
 	items = /* @__PURE__ */ new Map();
 	register(e) {
+		if (this.items.has(e.id)) throw Error(`Registry item '${e.id}' is already registered.`);
 		this.items.set(e.id, e);
 	}
 	unregister(e) {

@@ -9,9 +9,18 @@ export class Registry<T extends RegistryItem> {
 
     /**
      * Registers an item.
+     * Throws an error if the identifier is already registered.
      */
     public register(item: T): void {
+
+        if (this.items.has(item.id)) {
+            throw new Error(
+                `Registry item '${item.id}' is already registered.`
+            );
+        }
+
         this.items.set(item.id, item);
+
     }
 
     /**
@@ -22,7 +31,7 @@ export class Registry<T extends RegistryItem> {
     }
 
     /**
-     * Returns an item.
+     * Returns an item by its identifier.
      */
     public get(id: string): T | undefined {
         return this.items.get(id);
@@ -43,16 +52,17 @@ export class Registry<T extends RegistryItem> {
     }
 
     /**
-     * Clears the registry.
+     * Removes all registered items.
      */
     public clear(): void {
         this.items.clear();
     }
 
     /**
-     * Number of registered items.
+     * Returns the number of registered items.
      */
     public get size(): number {
         return this.items.size;
     }
+
 }
