@@ -1,17 +1,13 @@
+import { Registry } from "../registry/Registry";
+
 export class PlatformCore {
-  private static instance: PlatformCore;
+  public readonly registry = new Registry();
 
-  private constructor() {}
-
-  public static getInstance(): PlatformCore {
-    if (!PlatformCore.instance) {
-      PlatformCore.instance = new PlatformCore();
-    }
-
-    return PlatformCore.instance;
-  }
+  private readonly version = "0.1.0-alpha.1";
 
   public start(): void {
-    console.info("🚀 Lovelace UV Platform started");
+    console.info(
+      `🚀 Lovelace UV Platform ${this.version} started`
+    );
   }
 }
