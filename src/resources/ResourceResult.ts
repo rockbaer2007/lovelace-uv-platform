@@ -1,0 +1,1 @@
+import { ResourceStatus } from "./ResourceStatus";export interface ResourceResult<T>{readonly status:ResourceStatus;readonly data?:T;readonly timestamp:Date;readonly source?:string;readonly duration?:number;readonly cacheHit?:boolean;readonly error?:Error;}

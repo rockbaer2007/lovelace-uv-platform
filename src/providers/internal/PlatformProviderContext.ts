@@ -1,0 +1,1 @@
+import { EventBus } from "../../events";import { Registry,RegistryItem } from "../../registry";import { ProviderContext } from "../ProviderContext";export class PlatformProviderContext implements ProviderContext{constructor(public readonly registry:Registry<RegistryItem>,public readonly eventBus:EventBus){}}
