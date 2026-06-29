@@ -1,35 +1,54 @@
-//#region src/registry/Registry.ts
+//#region src/events/EventBus.ts
 var e = class {
-	items = /* @__PURE__ */ new Map();
-	register(e) {
-		if (this.items.has(e.id)) throw Error(`Registry item '${e.id}' is already registered.`);
-		this.items.set(e.id, e);
+	_listeners = /* @__PURE__ */ new Map();
+	subscribe(e, t) {
+		let n = this._listeners.get(e);
+		n || (n = /* @__PURE__ */ new Set(), this._listeners.set(e, n)), n.add(t);
 	}
-	unregister(e) {
-		return this.items.delete(e);
+	unsubscribe(e, t) {
+		this._listeners.get(e)?.delete(t);
 	}
-	get(e) {
-		return this.items.get(e);
-	}
-	has(e) {
-		return this.items.has(e);
-	}
-	getAll() {
-		return [...this.items.values()];
-	}
-	clear() {
-		this.items.clear();
-	}
-	get size() {
-		return this.items.size;
+	publish(e) {
+		let t = this._listeners.get(e.constructor);
+		if (t) for (let n of t) n(e);
 	}
 }, t = class {
-	_registry = new e();
+	_keySelector;
+	_items = /* @__PURE__ */ new Map();
+	constructor(e) {
+		this._keySelector = e;
+	}
+	register(e) {
+		let t = this._keySelector(e);
+		if (this._items.has(t)) throw Error(`Registry item '${t}' is already registered.`);
+		this._items.set(t, e);
+	}
+	unregister(e) {
+		return this._items.delete(e);
+	}
+	get(e) {
+		return this._items.get(e);
+	}
+	getAll() {
+		return [...this._items.values()];
+	}
+	has(e) {
+		return this._items.has(e);
+	}
+	clear() {
+		this._items.clear();
+	}
+}, n = class {
+	_registry = new t((e) => e.id);
+	_eventBus = new e();
 	get registry() {
 		return this._registry;
 	}
-}, n = class {
-	_services = new t();
+	get eventBus() {
+		return this._eventBus;
+	}
+}, r = class {
+	_services = new n();
 	get services() {
 		return this._services;
 	}
@@ -37,12 +56,12 @@ var e = class {
 };
 //#endregion
 //#region src/bootstrap/bootstrap.ts
-function r() {
-	new n().start();
+function i() {
+	new r().start();
 }
 //#endregion
 //#region src/main.ts
-r();
+i();
 //#endregion
 
 //# sourceMappingURL=lovelace-uv-platform.js.map
