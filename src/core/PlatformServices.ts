@@ -5,7 +5,7 @@ import { Registry, RegistryItem } from "../registry";
  */
 export class PlatformServices {
 
-    private readonly _registry = new Registry<RegistryItem>();
+    private readonly _registry = new Registry<RegistryItem>(item => item.id);
 
     /**
      * Returns the shared registry.

@@ -1,12 +1,10 @@
 /**
- * Represents an item that can be registered
- * inside a Registry.
+ * Represents an identifiable registry item.
+ *
+ * Public contract for components that expose an id.
  */
 export interface RegistryItem {
 
-    /**
-     * Unique identifier of the registry item.
-     */
     readonly id: string;
 
 }

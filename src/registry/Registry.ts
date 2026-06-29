@@ -1,68 +1,42 @@
-import { RegistryItem } from "./RegistryItem";
-
 /**
- * Generic registry for storing platform components.
+ * Generic registry implementation.
  */
-export class Registry<T extends RegistryItem> {
+export class Registry<T> {
 
-    private readonly items = new Map<string, T>();
+    private readonly _items = new Map<string, T>();
 
-    /**
-     * Registers an item.
-     * Throws an error if the identifier is already registered.
-     */
+    public constructor(
+        private readonly _keySelector: (item: T) => string
+    ) {}
+
     public register(item: T): void {
+        const id = this._keySelector(item);
 
-        if (this.items.has(item.id)) {
-            throw new Error(
-                `Registry item '${item.id}' is already registered.`
-            );
+        if (this._items.has(id)) {
+            throw new Error(`Registry item '${id}' is already registered.`);
         }
 
-        this.items.set(item.id, item);
-
+        this._items.set(id, item);
     }
 
-    /**
-     * Removes an item.
-     */
     public unregister(id: string): boolean {
-        return this.items.delete(id);
+        return this._items.delete(id);
     }
 
-    /**
-     * Returns an item by its identifier.
-     */
     public get(id: string): T | undefined {
-        return this.items.get(id);
+        return this._items.get(id);
     }
 
-    /**
-     * Checks whether an item exists.
-     */
-    public has(id: string): boolean {
-        return this.items.has(id);
-    }
-
-    /**
-     * Returns all registered items.
-     */
     public getAll(): readonly T[] {
-        return [...this.items.values()];
+        return [...this._items.values()];
     }
 
-    /**
-     * Removes all registered items.
-     */
+    public has(id: string): boolean {
+        return this._items.has(id);
+    }
+
     public clear(): void {
-        this.items.clear();
-    }
-
-    /**
-     * Returns the number of registered items.
-     */
-    public get size(): number {
-        return this.items.size;
+        this._items.clear();
     }
 
 }

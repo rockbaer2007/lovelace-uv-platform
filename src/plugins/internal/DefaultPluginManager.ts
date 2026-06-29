@@ -3,11 +3,16 @@ import { Plugin } from "../Plugin";
 import { PluginManager } from "../PluginManager";
 
 /**
- * Default implementation of PluginManager.
+ * Default implementation of the PluginManager.
+ *
+ * Visibility: Internal
+ * Stability: Experimental
  */
 export class DefaultPluginManager implements PluginManager {
 
-    private readonly _plugins = new Registry<Plugin>();
+    private readonly _plugins = new Registry<Plugin>(
+        plugin => plugin.metadata.id
+    );
 
     public register(plugin: Plugin): void {
         this._plugins.register(plugin);
@@ -26,19 +31,19 @@ export class DefaultPluginManager implements PluginManager {
     }
 
     public initialize(): void {
-        // Implement in next milestone.
+        // Will be implemented in CORE-008B.
     }
 
     public start(): void {
-        // Implement in next milestone.
+        // Will be implemented in CORE-008B.
     }
 
     public stop(): void {
-        // Implement in next milestone.
+        // Will be implemented in CORE-008B.
     }
 
     public dispose(): void {
-        // Implement in next milestone.
+        // Will be implemented in CORE-008B.
     }
 
 }
